@@ -54,11 +54,11 @@ else
 fi
 
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    printf "source '$HOME/dotfiles/bash/bashrc.sh'" >> ~/.bash_profile
-else
-    printf "source '$HOME/dotfiles/bash/bashrc.sh'" >> ~/.bashrc
-fi
+#if [[ "$OSTYPE" == "darwin"* ]]; then
+#    printf "source '$HOME/dotfiles/bash/bashrc.sh'" >> ~/.bash_profile
+#else
+#    printf "source '$HOME/dotfiles/bash/bashrc.sh'" >> ~/.bashrc
+#fi
 
 printf "so $HOME/dotfiles/vim/vimrc.vim" >> ~/.vimrc
 printf "source-file $HOME/dotfiles/tmux/tmux.conf" >> ~/.tmux.conf
