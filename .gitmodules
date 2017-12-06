@@ -1,3 +1,6 @@
 [submodule "vim"]
 	path = vim
 	url = https://github.com/datMaffin/vim-config.git
+[submodule "tmux"]
+	path = tmux
+	url = https://github.com/datMaffin/tmux-config.git
