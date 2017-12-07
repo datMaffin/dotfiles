@@ -1,16 +1,14 @@
-# My Simple Dotfiles
-
-Simple, customization of BASH, TMUX, and Vim. 
+# My Dotfiles
+My dotfiles of TMUX, and Vim. 
 
 ## Installation
+1. Clone the repository to a location of your choice 
+   ```$ git clone https://github.com/datMaffin/dotfiles.git```
+2. ```cd``` into the repository(```$ cd dotfiles```). 
+3. Execute ```git submodule update --init --recursive``` if you want all the 
+   config files.
+4. Execute the deploy script(```$ ./deploy.sh```) and choose which dotfiles to 
+   source automatically when starting TMUX or Vim.
 
-Once the repo is cloned into `~/`, execute the deploy script:
-```
-./deploy
-```
-
-This script guides you through the following:
-
-1. Checks if you have bash, tmux, and vim installed. 
-2. Appends .old to your old configuration files.
-3. Creates new configuration files, that contain a link to the repo.
+## Update
+Execute ```$ git submodule update --recursive```.

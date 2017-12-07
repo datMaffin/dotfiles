@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Global variables
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 check_for_software() {
 	echo "Checking to see if $1 is installed"
 	if ! [ -x "$(command -v $1)" ]; then
@@ -11,57 +14,32 @@ check_for_software() {
 	fi
 }
 
-echo "We're going to do the following:"
-echo "1. Check to make sure you have bash, vim, and tmux installed"
-echo "2. Back up your old configuration files."
+deploy_vim() {
+    check_for_software vim
+    echo "Appending source command to ~/.vimrc"
+    echo "so ${DIR}/vim/vimrc.vim" >> ~/.vimrc
+    echo "Deployed"
+    exit
+}
 
-echo "Let's get started? (y/n)"
-old_stty_cfg=$(stty -g)
-stty raw -echo
-answer=$( while ! head -c 1 | grep -i '[ny]' ;do true ;done )
-stty $old_stty_cfg
-if echo "$answer" | grep -iq "^y" ;then
-	echo 
-else
-	echo "Quitting, nothing was changed."
-	exit 0
+deploy_tmux() {
+    check_for_software tmux
+    echo "Appending source command to ~/.tmux.conf"
+    echo "source-file ${DIR}/tmux/tmux.conf" >> ~/.tmux.conf
+    echo "Deployed"
+    exit
+}
+
+# main
+echo "Which dotfiles do you want to deploy?"
+echo "[1] vim"
+echo "[2] tmux"
+
+read -s -n 1 answer
+echo $answer
+
+if [ 1 -eq $answer ]; then
+    deploy_vim
+elif [ 2 -eq $answer ]; then
+    deploy_tmux
 fi
-
-
-check_for_software bash
-echo 
-check_for_software vim
-echo
-check_for_software tmux
-echo
-
-echo
-echo -n "Would you like to backup your current dotfiles? (y/n) "
-old_stty_cfg=$(stty -g)
-stty raw -echo
-answer=$( while ! head -c 1 | grep -i '[ny]' ;do true ;done )
-stty $old_stty_cfg
-if echo "$answer" | grep -iq "^y" ;then
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        mv ~/.bash_profile ~/.bash_profile.old
-    else
-        mv ~/.bashrc ~/.bashrc.old
-    fi
-    mv ~/.tmux.conf ~/.tmux.conf.old
-    mv ~/.vimrc ~/.vimrc.old
-else
-	echo -e "\nNot backing up old dotfiles."
-fi
-
-
-#if [[ "$OSTYPE" == "darwin"* ]]; then
-#    printf "source '$HOME/dotfiles/bash/bashrc.sh'" >> ~/.bash_profile
-#else
-#    printf "source '$HOME/dotfiles/bash/bashrc.sh'" >> ~/.bashrc
-#fi
-
-printf "so $HOME/dotfiles/vim/vimrc.vim" >> ~/.vimrc
-printf "source-file $HOME/dotfiles/tmux/tmux.conf" >> ~/.tmux.conf
-
-echo
-echo "Please log out and log back in for default shell to be initialized."
