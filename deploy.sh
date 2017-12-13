@@ -22,6 +22,16 @@ deploy_vim() {
     exit
 }
 
+deploy_vim_plugins() {
+    check_for_software vim
+    echo "Insert source command at the start of ~/.vimrc"
+    echo "so ${DIR}/vim-plugins/vim-plugins.vim" | cat - ~/.vimrc > temp && mv temp ~/.vimrc
+    echo "Install Plugins"
+    vim +"set sh=sh" +PluginInstall +qall
+    echo "Deployed"
+    exit
+}
+
 deploy_tmux() {
     check_for_software tmux
     echo "Appending source command to ~/.tmux.conf"
@@ -33,7 +43,8 @@ deploy_tmux() {
 # main
 echo "Which dotfiles do you want to deploy?"
 echo "[1] vim"
-echo "[2] tmux"
+echo "[2] vim-plugins"
+echo "[3] tmux"
 
 read -s -n 1 answer
 echo $answer
@@ -41,5 +52,7 @@ echo $answer
 if [ 1 -eq $answer ]; then
     deploy_vim
 elif [ 2 -eq $answer ]; then
+    deploy_vim_plugins
+elif [ 3 -eq $answer ]; then
     deploy_tmux
 fi
