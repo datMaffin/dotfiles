@@ -11,4 +11,6 @@ My dotfiles of TMUX, and Vim.
    source automatically when starting TMUX or Vim.
 
 ## Update
-Execute `$ git pull` followed by `$ git submodule update --recursive`.
+Execute `$ git pull` followed by `$ git submodule update --recursive`. 
+
+New vim plugins can be conveniently installed/updated with the `./deploy` script.

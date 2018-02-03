@@ -32,6 +32,13 @@ deploy_vim_plugins() {
     exit
 }
 
+update_vim_plugins() {
+    echo "Install/Update Plugins"
+    vim +"set sh=sh" +PluginInstall +qall
+    echo "Updated"
+    exit
+}
+
 deploy_tmux() {
     check_for_software tmux
     echo "Appending source command to ~/.tmux.conf"
@@ -42,17 +49,23 @@ deploy_tmux() {
 
 # main
 echo "Which dotfiles do you want to deploy?"
-echo "[1] vim"
-echo "[2] vim-plugins"
-echo "[3] tmux"
+echo "[1] Deploy: vim"
+echo "[2] Deploy: vim-plugins"
+echo "[3] Update: vim-plugins"
+echo "[4] Deploy: tmux"
+echo "[_] quit"
 
 read -s -n 1 answer
 echo $answer
 
-if [ 1 -eq $answer ]; then
+if [ "1" == "$answer" ]; then
     deploy_vim
-elif [ 2 -eq $answer ]; then
+elif [ "2" == "$answer" ]; then
     deploy_vim_plugins
-elif [ 3 -eq $answer ]; then
+elif [ "3" == "$answer" ]; then
+    update_vim_plugins
+elif [ "4" == "$answer" ]; then
     deploy_tmux
 fi
+
+echo "quit..."
