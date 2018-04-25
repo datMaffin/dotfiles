@@ -4,14 +4,14 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 check_for_software() {
-	echo "Checking to see if $1 is installed"
-	if ! [ -x "$(command -v $1)" ]; then
-		echo "$1 is NOT installed."
-		echo "Please install $1 and try again."
-		exit
-	else
-		echo "$1 is installed."
-	fi
+    echo "Checking to see if $1 is installed"
+    if ! [ -x "$(command -v $1)" ]; then
+        echo "$1 is NOT installed."
+        echo "Please install $1 and try again."
+        exit
+    else
+        echo "$1 is installed."
+    fi
 }
 
 deploy_vim() {
