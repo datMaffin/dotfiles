@@ -1,2 +1,5 @@
-.DS_Store   # ignore the macOS finder file
-*.swp       # ignore swap files from vim
+# ignore the macOS finder file
+.DS_Store
+
+# ignore swap files from vim
+*.swp
