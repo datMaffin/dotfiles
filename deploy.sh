@@ -27,14 +27,14 @@ deploy_vim_plugins() {
     echo "Insert source command at the start of ~/.vimrc"
     echo "so ${DIR}/vim-plugins/vim-plugins.vim" | cat - ~/.vimrc > temp && mv temp ~/.vimrc
     echo "Install Plugins"
-    vim +"set sh=sh" +PluginInstall +qall
+    vim +"set sh=sh" +PlugInstall +qall
     echo "Deployed"
     exit
 }
 
 update_vim_plugins() {
     echo "Install/Update Plugins"
-    vim +"set sh=sh" +PluginInstall +qall
+    vim +"set sh=sh" +PlugInstall +qall
     echo "Updated"
     exit
 }
