@@ -24,6 +24,7 @@ deploy_vim() {
 
 deploy_vim_plugins() {
     check_for_software vim
+    check_for_software curl
     echo "Insert source command at the start of ~/.vimrc"
     echo "so ${DIR}/vim-plugins/vim-plugins.vim" | cat - ~/.vimrc > temp && mv temp ~/.vimrc
     echo "Install Plugins"
